@@ -165,7 +165,6 @@ pagina = st.sidebar.selectbox(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.write("Creado por Santiago 😎")
 st.sidebar.caption("Herramienta de apoyo a la decisión. No reemplaza el juicio clínico.")
 
 # =========================
