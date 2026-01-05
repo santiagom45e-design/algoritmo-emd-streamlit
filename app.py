@@ -337,12 +337,6 @@ elif pagina == "Algoritmo EMD (Anti-VEGF)":
 # =========================
 elif pagina == "Bibliografia":
     st.title ("BIBLIOGRAFIA")
-    col_izq, col_der = st.columns([1.1, 1])
-
-    # -------------------------
-    # Columna izquierda: Edema macular diabético
-    # -------------------------
-    with col_izq:
         st.subheader("Edema macular diabético")
 
         st.markdown(    """
@@ -388,64 +382,4 @@ elif pagina == "Bibliografia":
                         """,
                             unsafe_allow_html=True)
 
-    with col_der:
-        st.subheader("Degeneración macular relacionada con la edad")
-
-        st.markdown(
-                        """
-                        <ol>
-                        
-                        <li><b>Zhang S, Ren J, Chai R, Yuan S, Hao Y.</b>
-                        Global burden of low vision and blindness due to age-related macular degeneration from 1990 to 2021 and projections for 2050.
-                        <i>BMC Public Health</i>. 2024;24(1):3510.
-                        doi:10.1186/s12889-024-21047-x</li>
-                        
-                        <li><b>Pugazhendhi A, Hubbell M, Jairam P, Ambati B.</b>
-                        Neovascular Macular Degeneration: A Review of Etiology, Risk Factors, and Recent Advances in Research and Therapy.
-                        <i>Int J Mol Sci</i>. 2021;22(3):1170.
-                        doi:10.3390/ijms22031170</li>
-                        
-                        <li><b>Schneider M, Bjerager J, Hodzic-Hadzibegovic D, Klefter ON, Subhi Y, Hajari J.</b>
-                        Short-term outcomes of treatment switch to faricimab in patients with aflibercept-resistant neovascular age-related macular degeneration.
-                        <i>Graefes Arch Clin Exp Ophthalmol</i>. 2024;262(7):2153-2162.
-                        doi:10.1007/s00417-024-06421-0</li>
-                        
-                        <li><b>Wong DT, Aboobaker S, Maberley D, Sharma S, Yoganathan P.</b>
-                        Switching to faricimab from the current anti-VEGF therapy: evidence-based expert recommendations.
-                        <i>BMJ Open Ophthalmol</i>. 2025;10(1):e001967.
-                        doi:10.1136/bmjophth-2024-001967</li>
-                        
-                        <li><b>Sharma A, Kumar N, Kuppermann BD, Bandello F, Loewenstein A.</b>
-                        Faricimab: expanding horizon beyond VEGF.
-                        <i>Eye</i>. 2020;34(5):802-804.
-                        doi:10.1038/s41433-019-0670-1</li>
-                        
-                        <li><b>Khanani AM, Kotecha A, Chang A, et al.</b>
-                        TENAYA and LUCERNE: Two-Year Results from the Phase 3 Neovascular Age-Related Macular Degeneration Trials of Faricimab with Treat-and-Extend Dosing in Year 2.
-                        <i>Ophthalmology</i>. 2024;131(8):914-926.
-                        doi:10.1016/j.ophtha.2024.02.014</li>
-                        
-                        <li><b>Friedman SM, Xu Y, Sherman S, et al.</b>
-                        Aflibercept 8 mg versus Faricimab Treat-and-Extend for Diabetic Macular Edema or Neovascular Age-Related Macular Degeneration: A Bayesian Fixed-Effect Network Meta-analysis of Clinical Trials.
-                        <i>Ophthalmol Ther</i>. 2025;14(11):2919-2936.
-                        doi:10.1007/s40123-025-01247-3</li>
-                        
-                        <li><b>Wykoff CC, Brown DM, Reed K, et al.</b>
-                        Effect of High-Dose Intravitreal Aflibercept, 8 mg, in Patients With Neovascular Age-Related Macular Degeneration: The Phase 2 CANDELA Randomized Clinical Trial.
-                        <i>JAMA Ophthalmol</i>. 2023;141(9):834-842.
-                        doi:10.1001/jamaophthalmol.2023.2421</li>
-                        
-                        <li><b>Lanzetta P, Korobelnik JF, Heier JS, et al.</b>
-                        Intravitreal aflibercept 8 mg in neovascular age-related macular degeneration (PULSAR): 48-week results from a randomised, double-masked, non-inferiority, phase 3 trial.
-                        <i>Lancet</i>. 2024;403(10432):1141-1152.
-                        doi:10.1016/S0140-6736(24)00063-1</li>
-                        
-                        <li><b>Korobelnik JF, Dugel PU, Wykoff CC, et al.</b>
-                        Intravitreal aflibercept 8 mg in neovascular age-related macular degeneration: results from the phase 3 PULSAR trial.
-                        <i>Ophthalmology</i>. 2025;S0161-6420(25)00532-9.
-                        doi:10.1016/j.ophtha.2025.08.022</li>
-                        
-                        </ol>
-                        """,
-                            unsafe_allow_html=True)
-
+   
