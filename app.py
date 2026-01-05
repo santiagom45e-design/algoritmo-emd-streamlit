@@ -1,5 +1,4 @@
 import streamlit as st
-from datetime import datetime
 
 # =========================
 # Configuración básica
@@ -23,7 +22,7 @@ def algoritmo_emd(
     avmc_actual: int,
 ):
     """
-    Implementa el algoritmo que resumiste para manejo de EMD con Anti-VEGF.
+    Se implementa el algoritmo para manejo de EMD con Anti-VEGF.
     Devuelve: (plan, justificación, cambio_gmc, cambio_av)
     """
 
