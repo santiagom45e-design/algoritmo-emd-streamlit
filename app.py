@@ -337,9 +337,8 @@ elif pagina == "Algoritmo EMD (Anti-VEGF)":
 # =========================
 elif pagina == "Bibliografia":
     st.title ("BIBLIOGRAFIA")
-        st.subheader("Edema macular diabético")
-
-        st.markdown(    """
+    st.subheader("Edema macular diabético")
+    st.markdown(    """
                         <ol>
                         
                         <li><b>Zhang J, Zhang J, Zhang C, et al.</b>
