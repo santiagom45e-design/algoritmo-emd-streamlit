@@ -384,51 +384,50 @@ elif pagina == "Bibliografia":
                         """)
 
     with col_der:
-       st.subheader("Degeneración macular relacionada con la edad")
+        st.subheader("Degeneración macular relacionada con la edad")
 
         st.markdown(
-            """
-        <ol>
-        <li><b>Zhang S</b>, Ren J, Chai R, Yuan S, Hao Y. Global burden of AMD 1990–2050.
-        <i>BMC Public Health</i>. 2024;24(1):3510.</li>
-        
-        <li><b>Pugazhendhi A</b>, Hubbell M, Jairam P, Ambati B.
-        Neovascular macular degeneration — etiology & therapy review.
-        <i>Int J Mol Sci</i>. 2021;22(3):1170.</li>
-        
-        <li><b>Schneider M</b>, Bjerager J, Hodzic-Hadzibegovic D, et al.
-        Switch to Faricimab in aflibercept-resistant nAMD.
-        <i>Graefes Arch Clin Exp Ophthalmol</i>. 2024;262(7):2153-2162.</li>
-        
-        <li><b>Wong DT</b>, Aboobaker S, Maberley D, Sharma S, Yoganathan P.
-        Expert recommendations for switching to Faricimab.
-        <i>BMJ Open Ophthalmol</i>. 2025;10(1):e001967.</li>
-        
-        <li><b>Sharma A</b>, Kumar N, Kuppermann BD, Bandello F, Loewenstein A.
-        Faricimab — expanding horizon beyond VEGF.
-        <i>Eye</i>. 2020;34(5):802-804.</li>
-        
-        <li><b>Khanani AM</b>, Kotecha A, Chang A, et al.
-        TENAYA & LUCERNE — Year-2 Faricimab treat-and-extend.
-        <i>Ophthalmology</i>. 2024;131(8):914-926.</li>
-        
-        <li><b>Friedman SM</b>, Xu Y, Sherman S, et al.
-        Aflibercept 8 mg vs Faricimab — network meta-analysis.
-        <i>Ophthalmol Ther</i>. 2025;14(11):2919-2936.</li>
-        
-        <li><b>Wykoff CC</b>, Brown DM, Reed K, et al.
-        High-dose Aflibercept 8 mg — CANDELA trial.
-        <i>JAMA Ophthalmol</i>. 2023;141(9):834-842.</li>
-        
-        <li><b>Lanzetta P</b>, Korobelnik JF, Heier JS, et al.
-        PULSAR — Aflibercept 8 mg in nAMD (48-week results).
-        <i>Lancet</i>. 2024;403(10432):1141-1152.</li>
-        
-        <li><b>Korobelnik JF</b>, Dugel PU, Wykoff CC, et al.
-        PULSAR — Long-term phase-3 outcomes.
-        <i>Ophthalmology</i>. 2025.</li>
-        </ol>
-        """,
-            unsafe_allow_html=True
-        )
+                        """
+                    <ol>
+                    <li><b>Zhang S</b>, Ren J, Chai R, Yuan S, Hao Y. Global burden of AMD 1990–2050.
+                    <i>BMC Public Health</i>. 2024;24(1):3510.</li>
+                    
+                    <li><b>Pugazhendhi A</b>, Hubbell M, Jairam P, Ambati B.
+                    Neovascular macular degeneration — etiology & therapy review.
+                    <i>Int J Mol Sci</i>. 2021;22(3):1170.</li>
+                    
+                    <li><b>Schneider M</b>, Bjerager J, Hodzic-Hadzibegovic D, et al.
+                    Switch to Faricimab in aflibercept-resistant nAMD.
+                    <i>Graefes Arch Clin Exp Ophthalmol</i>. 2024;262(7):2153-2162.</li>
+                    
+                    <li><b>Wong DT</b>, Aboobaker S, Maberley D, Sharma S, Yoganathan P.
+                    Expert recommendations for switching to Faricimab.
+                    <i>BMJ Open Ophthalmol</i>. 2025;10(1):e001967.</li>
+                    
+                    <li><b>Sharma A</b>, Kumar N, Kuppermann BD, Bandello F, Loewenstein A.
+                    Faricimab — expanding horizon beyond VEGF.
+                    <i>Eye</i>. 2020;34(5):802-804.</li>
+                    
+                    <li><b>Khanani AM</b>, Kotecha A, Chang A, et al.
+                    TENAYA & LUCERNE — Year-2 Faricimab treat-and-extend.
+                    <i>Ophthalmology</i>. 2024;131(8):914-926.</li>
+                    
+                    <li><b>Friedman SM</b>, Xu Y, Sherman S, et al.
+                    Aflibercept 8 mg vs Faricimab — network meta-analysis.
+                    <i>Ophthalmol Ther</i>. 2025;14(11):2919-2936.</li>
+                    
+                    <li><b>Wykoff CC</b>, Brown DM, Reed K, et al.
+                    High-dose Aflibercept 8 mg — CANDELA trial.
+                    <i>JAMA Ophthalmol</i>. 2023;141(9):834-842.</li>
+                    
+                    <li><b>Lanzetta P</b>, Korobelnik JF, Heier JS, et al.
+                    PULSAR — Aflibercept 8 mg in nAMD (48-week results).
+                    <i>Lancet</i>. 2024;403(10432):1141-1152.</li>
+                    
+                    <li><b>Korobelnik JF</b>, Dugel PU, Wykoff CC, et al.
+                    PULSAR — Long-term phase-3 outcomes.
+                    <i>Ophthalmology</i>. 2025.</li>
+                    </ol>
+                    """,
+                    unsafe_allow_html=True)
 
