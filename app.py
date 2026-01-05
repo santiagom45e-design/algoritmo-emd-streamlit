@@ -345,89 +345,107 @@ elif pagina == "Bibliografia":
     with col_izq:
         st.subheader("Edema macular diabético")
 
-        st.markdown("""
-                        1. **Zhang J, Zhang J, Zhang C, et al.**
-                           Diabetic Macular Edema: Current Understanding, Molecular Mechanisms and Therapeutic Implications.
-                           *Cells*. 2022;11(21):3362.
+        st.markdown(    """
+                        <ol>
                         
-                        2. **Rodríguez FJ, Wu L, Bordon AF, et al.**
-                           Intravitreal aflibercept for the treatment of patients with diabetic macular edema in routine clinical practice in Latin America (AQUILA study).
-                           *Int J Retina Vitreous*. 2022;8(1):52.
+                        <li><b>Zhang J, Zhang J, Zhang C, et al.</b>
+                        Diabetic Macular Edema: Current Understanding, Molecular Mechanisms and Therapeutic Implications.
+                        <i>Cells</i>. 2022;11(21):3362.</li>
                         
-                        3. **Liberski S, Wichrowska M, Kocięcki J.**
-                           Aflibercept versus Faricimab in the treatment of nAMD and DME: Review.
-                           *Int J Mol Sci*. 2022;23(16):9424.
+                        <li><b>Rodríguez FJ, Wu L, Bordon AF, et al.</b>
+                        Intravitreal aflibercept for the treatment of patients with diabetic macular edema in routine clinical practice in Latin America: the AQUILA study.
+                        <i>Int J Retina Vitreous</i>. 2022;8(1):52.</li>
                         
-                        4. **Penha FM, Masud M, Khanani ZA, et al.**
-                           Real-world evidence of dual inhibition of VEGF-A and ANG-2 in nAMD and DME.
-                           *Int J Retina Vitreous*. 2024;10(1):5.
+                        <li><b>Liberski S, Wichrowska M, Kocięcki J.</b>
+                        Aflibercept versus Faricimab in the Treatment of Neovascular Age-Related Macular Degeneration and Diabetic Macular Edema: A Review.
+                        <i>Int J Mol Sci</i>. 2022;23(16):9424.</li>
                         
-                        5. **Wykoff CC, Abreu F, Adamis AP, et al.**
-                           YOSEMITE & RHINE — Faricimab with extended dosing up to Q16W in DME.
-                           *Lancet*. 2022;399(10326):741–755.
+                        <li><b>Penha FM, Masud M, Khanani ZA, et al.</b>
+                        Review of real-world evidence of dual inhibition of VEGF-A and ANG-2 with faricimab in nAMD and DME.
+                        <i>Int J Retina Vitreous</i>. 2024;10(1):5.</li>
                         
-                        6. **Brown DM, Boyer DS, Do DV, et al.**
-                           Aflibercept 8 mg in diabetic macular edema (PHOTON): 48-week results.
-                           *Lancet*. 2024;403(10432):1153–1163.
+                        <li><b>Wykoff CC, Abreu F, Adamis AP, et al.</b>
+                        Efficacy, durability, and safety of intravitreal faricimab with extended dosing up to every 16 weeks in patients with diabetic macular oedema (YOSEMITE and RHINE): two randomised, double-masked, phase 3 trials.
+                        <i>Lancet</i>. 2022;399(10326):741–755.</li>
                         
-                        7. **Friedman SM, Xu Y, Sherman S, et al.**
-                           Aflibercept 8 mg vs Faricimab — Bayesian network meta-analysis.
-                           *Ophthalmol Ther*. 2025;14(11):2919–2936.
+                        <li><b>Brown DM, Boyer DS, Do DV, et al.</b>
+                        Intravitreal aflibercept 8 mg in diabetic macular oedema (PHOTON): 48-week results from a randomised, double-masked, non-inferiority, phase 2/3 trial.
+                        <i>Lancet</i>. 2024;403(10432):1153–1163.</li>
                         
-                        8. **Maccauro C, Jimenez Perez Y, Neri P, et al.**
-                           Short-term outcomes of Faricimab and Aflibercept 8 mg in DME.
-                           *AJO International*. 2025;2:100132.
+                        <li><b>Friedman SM, Xu Y, Sherman S, et al.</b>
+                        Aflibercept 8 mg versus Faricimab Treat-and-Extend for Diabetic Macular Edema or Neovascular Age-Related Macular Degeneration: A Bayesian Fixed-Effect Network Meta-analysis of Clinical Trials.
+                        <i>Ophthalmol Ther</i>. 2025;14(11):2919–2936.</li>
                         
-                        9. **Asociación Mexicana de Retina.**
-                           Primer consenso nacional de edema macular diabético.
-                           *Rev Mex Oftalmol*. 2021;95(Suppl 2):1–144.
-                        """)
+                        <li><b>Maccauro C, Jimenez Perez Y, Neri P, et al.</b>
+                        Short-term outcomes of faricimab and aflibercept 8 mg in diabetic macular edema.
+                        <i>AJO International</i>. 2025;2:100132.</li>
+                        
+                        <li><b>Asociación Mexicana de Retina.</b>
+                        Primer consenso nacional de edema macular diabético.
+                        <i>Rev Mex Oftalmol</i>. 2021;95(Suppl 2):1–144.</li>
+                        
+                        </ol>
+                        """,
+                            unsafe_allow_html=True)
 
     with col_der:
         st.subheader("Degeneración macular relacionada con la edad")
 
         st.markdown(
                         """
-                    <ol>
-                    <li><b>Zhang S</b>, Ren J, Chai R, Yuan S, Hao Y. Global burden of AMD 1990–2050.
-                    <i>BMC Public Health</i>. 2024;24(1):3510.</li>
-                    
-                    <li><b>Pugazhendhi A</b>, Hubbell M, Jairam P, Ambati B.
-                    Neovascular macular degeneration — etiology & therapy review.
-                    <i>Int J Mol Sci</i>. 2021;22(3):1170.</li>
-                    
-                    <li><b>Schneider M</b>, Bjerager J, Hodzic-Hadzibegovic D, et al.
-                    Switch to Faricimab in aflibercept-resistant nAMD.
-                    <i>Graefes Arch Clin Exp Ophthalmol</i>. 2024;262(7):2153-2162.</li>
-                    
-                    <li><b>Wong DT</b>, Aboobaker S, Maberley D, Sharma S, Yoganathan P.
-                    Expert recommendations for switching to Faricimab.
-                    <i>BMJ Open Ophthalmol</i>. 2025;10(1):e001967.</li>
-                    
-                    <li><b>Sharma A</b>, Kumar N, Kuppermann BD, Bandello F, Loewenstein A.
-                    Faricimab — expanding horizon beyond VEGF.
-                    <i>Eye</i>. 2020;34(5):802-804.</li>
-                    
-                    <li><b>Khanani AM</b>, Kotecha A, Chang A, et al.
-                    TENAYA & LUCERNE — Year-2 Faricimab treat-and-extend.
-                    <i>Ophthalmology</i>. 2024;131(8):914-926.</li>
-                    
-                    <li><b>Friedman SM</b>, Xu Y, Sherman S, et al.
-                    Aflibercept 8 mg vs Faricimab — network meta-analysis.
-                    <i>Ophthalmol Ther</i>. 2025;14(11):2919-2936.</li>
-                    
-                    <li><b>Wykoff CC</b>, Brown DM, Reed K, et al.
-                    High-dose Aflibercept 8 mg — CANDELA trial.
-                    <i>JAMA Ophthalmol</i>. 2023;141(9):834-842.</li>
-                    
-                    <li><b>Lanzetta P</b>, Korobelnik JF, Heier JS, et al.
-                    PULSAR — Aflibercept 8 mg in nAMD (48-week results).
-                    <i>Lancet</i>. 2024;403(10432):1141-1152.</li>
-                    
-                    <li><b>Korobelnik JF</b>, Dugel PU, Wykoff CC, et al.
-                    PULSAR — Long-term phase-3 outcomes.
-                    <i>Ophthalmology</i>. 2025.</li>
-                    </ol>
-                    """,
-                    unsafe_allow_html=True)
+                        <ol>
+                        
+                        <li><b>Zhang S, Ren J, Chai R, Yuan S, Hao Y.</b>
+                        Global burden of low vision and blindness due to age-related macular degeneration from 1990 to 2021 and projections for 2050.
+                        <i>BMC Public Health</i>. 2024;24(1):3510.
+                        doi:10.1186/s12889-024-21047-x</li>
+                        
+                        <li><b>Pugazhendhi A, Hubbell M, Jairam P, Ambati B.</b>
+                        Neovascular Macular Degeneration: A Review of Etiology, Risk Factors, and Recent Advances in Research and Therapy.
+                        <i>Int J Mol Sci</i>. 2021;22(3):1170.
+                        doi:10.3390/ijms22031170</li>
+                        
+                        <li><b>Schneider M, Bjerager J, Hodzic-Hadzibegovic D, Klefter ON, Subhi Y, Hajari J.</b>
+                        Short-term outcomes of treatment switch to faricimab in patients with aflibercept-resistant neovascular age-related macular degeneration.
+                        <i>Graefes Arch Clin Exp Ophthalmol</i>. 2024;262(7):2153-2162.
+                        doi:10.1007/s00417-024-06421-0</li>
+                        
+                        <li><b>Wong DT, Aboobaker S, Maberley D, Sharma S, Yoganathan P.</b>
+                        Switching to faricimab from the current anti-VEGF therapy: evidence-based expert recommendations.
+                        <i>BMJ Open Ophthalmol</i>. 2025;10(1):e001967.
+                        doi:10.1136/bmjophth-2024-001967</li>
+                        
+                        <li><b>Sharma A, Kumar N, Kuppermann BD, Bandello F, Loewenstein A.</b>
+                        Faricimab: expanding horizon beyond VEGF.
+                        <i>Eye</i>. 2020;34(5):802-804.
+                        doi:10.1038/s41433-019-0670-1</li>
+                        
+                        <li><b>Khanani AM, Kotecha A, Chang A, et al.</b>
+                        TENAYA and LUCERNE: Two-Year Results from the Phase 3 Neovascular Age-Related Macular Degeneration Trials of Faricimab with Treat-and-Extend Dosing in Year 2.
+                        <i>Ophthalmology</i>. 2024;131(8):914-926.
+                        doi:10.1016/j.ophtha.2024.02.014</li>
+                        
+                        <li><b>Friedman SM, Xu Y, Sherman S, et al.</b>
+                        Aflibercept 8 mg versus Faricimab Treat-and-Extend for Diabetic Macular Edema or Neovascular Age-Related Macular Degeneration: A Bayesian Fixed-Effect Network Meta-analysis of Clinical Trials.
+                        <i>Ophthalmol Ther</i>. 2025;14(11):2919-2936.
+                        doi:10.1007/s40123-025-01247-3</li>
+                        
+                        <li><b>Wykoff CC, Brown DM, Reed K, et al.</b>
+                        Effect of High-Dose Intravitreal Aflibercept, 8 mg, in Patients With Neovascular Age-Related Macular Degeneration: The Phase 2 CANDELA Randomized Clinical Trial.
+                        <i>JAMA Ophthalmol</i>. 2023;141(9):834-842.
+                        doi:10.1001/jamaophthalmol.2023.2421</li>
+                        
+                        <li><b>Lanzetta P, Korobelnik JF, Heier JS, et al.</b>
+                        Intravitreal aflibercept 8 mg in neovascular age-related macular degeneration (PULSAR): 48-week results from a randomised, double-masked, non-inferiority, phase 3 trial.
+                        <i>Lancet</i>. 2024;403(10432):1141-1152.
+                        doi:10.1016/S0140-6736(24)00063-1</li>
+                        
+                        <li><b>Korobelnik JF, Dugel PU, Wykoff CC, et al.</b>
+                        Intravitreal aflibercept 8 mg in neovascular age-related macular degeneration: results from the phase 3 PULSAR trial.
+                        <i>Ophthalmology</i>. 2025;S0161-6420(25)00532-9.
+                        doi:10.1016/j.ophtha.2025.08.022</li>
+                        
+                        </ol>
+                        """,
+                            unsafe_allow_html=True)
 
