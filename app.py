@@ -153,14 +153,19 @@ def algoritmo_emd(
     justificacion = "Revisar datos ingresados y correlacionar con el contexto clínico."
     return plan, justificacion, cambio_gmc, cambio_av
 
-
+def algoritmo_de_DMRE(
+    tipo_paciente: str,
+    lir: bool,
+    lsr: int,
+    GMC:int,
+)  
 # =========================
 # Sidebar (menú lateral)
 # =========================
 st.sidebar.title("Menú")
 pagina = st.sidebar.selectbox(
     "Selecciona una sección:",
-    ["Inicio", "Algoritmo EMD (Anti-VEGF)","Bibliografia"]
+    ["Inicio", "Algoritmo EMD (Anti-VEGF)","algoritmo de DMRE", "Bibliografia"]
 )
 
 st.sidebar.markdown("---")
@@ -380,5 +385,20 @@ elif pagina == "Bibliografia":
                         </ol>
                         """,
                             unsafe_allow_html=True)
+    
+# =========================
+# Página: algoritmo de DMRE
+# =========================
+elif pagina == algoritmo de DMRE:
+    st.title("algoritmo de DMRE (Degeneración Macular Relacionada con la Edad💉)")
+    st.markdown(
+        """
+        Ingresa los datos clave del paciente para que la herramienta sugiera:
+        - Si continuar, acortar o extender el intervalo.
+        - Si realizar **switch** de Anti-VEGF.
+        - Si considerar **corticoide intravítreo (Ozurdex)**.
+        """
+    )
+
 
    
