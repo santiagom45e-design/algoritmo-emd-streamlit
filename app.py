@@ -152,20 +152,108 @@ def algoritmo_emd(
     plan = "Sin decisión automática"
     justificacion = "Revisar datos ingresados y correlacionar con el contexto clínico."
     return plan, justificacion, cambio_gmc, cambio_av
-
-def algoritmo_de_DMRE(
-    tipo_paciente: str,
+# =========================
+# Lógica del algoritmo DMRE (simplificado para intervalos)
+# =========================
+def algoritmo_dmre(
+    intervalo_actual: str,
     lir: bool,
-    lsr: int,
-    GMC:int,
-)  
+    lsr_micras: float,
+    avmc_basal: int,
+    avmc_mejor: int,
+    avmc_actual: int,
+    hemorragia_nueva: bool,
+    gmc_sem16: float,
+    gmc_min_hist: float,
+    gmc_actual: float,
+):
+    """
+    DMRE Anti-VEGF (Aflibercept 8 / Faricimab 6) - lógica de actividad y ajuste de intervalo.
+    Devuelve:
+      - plan (Extender / Mantener / Acortar / Considerar switch)
+      - justificación
+      - detalle (dict)
+    """
+
+    # Intervalo en semanas
+    map_int = {"Q4W": 4, "Q8W": 8, "Q12W": 12, "Q16W": 16}
+    int_sem = map_int.get(intervalo_actual, 8)
+
+    # Cambios visuales
+    delta_vs_basal = avmc_actual - avmc_basal      # negativo = empeora
+    delta_vs_mejor = avmc_actual - avmc_mejor      # negativo = peor que su mejor
+
+    # Criterios de actividad por OCT/visión/hemorragia (según umbrales del diagrama)
+    actividad_liquido = lir or (lsr_micras >= 50)
+    actividad_vision = (delta_vs_basal <= -5) or (delta_vs_mejor <= -10)
+    actividad_hemorragia = hemorragia_nueva
+
+    # Criterios GMC del diagrama
+    delta_gmc_vs_sem16 = None if gmc_sem16 <= 0 else (gmc_actual - gmc_sem16)
+    delta_gmc_vs_min = None if gmc_min_hist <= 0 else (gmc_actual - gmc_min_hist)
+
+    actividad_gmc = False
+    motivos_gmc = []
+    if delta_gmc_vs_sem16 is not None and delta_gmc_vs_sem16 >= 50:
+        actividad_gmc = True
+        motivos_gmc.append(f"ΔGMC vs semana 16 = +{delta_gmc_vs_sem16:.0f} µm (≥ 50)")
+    if delta_gmc_vs_min is not None and delta_gmc_vs_min >= 75:
+        actividad_gmc = True
+        motivos_gmc.append(f"ΔGMC vs mínimo histórico = +{delta_gmc_vs_min:.0f} µm (≥ 75)")
+
+    # Actividad global
+    actividad = actividad_liquido or actividad_vision or actividad_hemorragia or actividad_gmc
+
+    # Reglas de ajuste de intervalo (enfoque práctico)
+    # - Si NO hay actividad: extender +4 semanas hasta Q16W
+    # - Si hay actividad: acortar -4 semanas hasta mínimo Q8W
+    # - Si hay actividad pese a Q8W: sugerir considerar switch / reevaluación
+    if not actividad:
+        if int_sem < 16:
+            nuevo = min(16, int_sem + 4)
+            plan = f"Extender intervalo a Q{nuevo}W"
+            just = "Sin criterios de actividad (líquido/visión/hemorragia/GMC). Se puede extender en +4 semanas (máx Q16W)."
+        else:
+            plan = "Mantener intervalo (Q16W)"
+            just = "Sin criterios de actividad y ya está en el intervalo máximo (Q16W)."
+    else:
+        if int_sem > 8:
+            nuevo = max(8, int_sem - 4)
+            plan = f"Acortar intervalo a Q{nuevo}W"
+            just = "Hay criterios de actividad. Se recomienda acortar 4 semanas (mínimo Q8W)."
+        else:
+            plan = "Mantener Q8W y considerar switch"
+            just = "Hay actividad a pesar de estar en intervalo corto (Q8W). Considerar evaluación para switch o causas de respuesta subóptima."
+
+    # Construir justificación detallada
+    motivos = []
+    if actividad_liquido:
+        motivos.append("Actividad por OCT: LIR presente o LSR ≥ 50 µm.")
+    if actividad_vision:
+        motivos.append("Actividad funcional: caída de AVMC (≤ -5 vs basal o ≤ -10 vs mejor).")
+    if actividad_hemorragia:
+        motivos.append("Actividad clínica: hemorragia macular nueva.")
+    if actividad_gmc:
+        motivos.append("Actividad por GMC: " + "; ".join(motivos_gmc))
+
+    detalle = {
+        "actividad": actividad,
+        "delta_vs_basal_letras": delta_vs_basal,
+        "delta_vs_mejor_letras": delta_vs_mejor,
+        "delta_gmc_vs_sem16": delta_gmc_vs_sem16,
+        "delta_gmc_vs_min": delta_gmc_vs_min,
+        "motivos": motivos
+    }
+    return plan, just, detalle
+
+
 # =========================
 # Sidebar (menú lateral)
 # =========================
 st.sidebar.title("Menú")
 pagina = st.sidebar.selectbox(
     "Selecciona una sección:",
-    ["Inicio", "Algoritmo EMD (Anti-VEGF)","algoritmo de DMRE", "Bibliografia"]
+    ["Inicio", "Algoritmo EMD (Anti-VEGF)", "Algoritmo DMRE (Anti-VEGF)", "Bibliografia"]
 )
 
 st.sidebar.markdown("---")
@@ -175,7 +263,8 @@ st.sidebar.caption("Herramienta de apoyo a la decisión. No reemplaza el juicio 
 # Página: INICIO
 # =========================
 if pagina == "Inicio":
-    st.title("Algoritmos clínicos para EMD 👁️‍🧠")
+    st.title("Algoritmos clínicos (EMD y DMRE) 👁️‍🧠")
+
     st.write(
         """
         Esta app implementa una **herramienta de apoyo a la decisión** para el manejo del
@@ -387,18 +476,89 @@ elif pagina == "Bibliografia":
                             unsafe_allow_html=True)
     
 # =========================
-# Página: algoritmo de DMRE
+# Página: ALGORTIMO DMRE
 # =========================
-elif pagina == algoritmo de DMRE:
-    st.title("algoritmo de DMRE (Degeneración Macular Relacionada con la Edad💉)")
-    st.markdown(
-        """
-        Ingresa los datos clave del paciente para que la herramienta sugiera:
-        - Si continuar, acortar o extender el intervalo.
-        - Si realizar **switch** de Anti-VEGF.
-        - Si considerar **corticoide intravítreo (Ozurdex)**.
-        """
-    )
+elif pagina == "Algoritmo DMRE (Anti-VEGF)":
+    st.title("Algoritmo DMRE – Anti-VEGF 💉👁️")
+    st.caption("Incluye criterios de actividad por OCT (LIR/LSR), AVMC, hemorragia y GMC (Δ≥50 vs sem16 o Δ≥75 vs mínimo).")
 
+    col_izq, col_der = st.columns([1.15, 1])
 
+    with col_izq:
+        st.subheader("Esquema actual")
+        intervalo_actual = st.selectbox("Intervalo actual", ["Q8W", "Q12W", "Q16W"], index=0)
+
+        st.markdown("---")
+        st.subheader("OCT – Líquido")
+        lir = st.radio("¿LIR (líquido intrarretiniano) presente?", ["No", "Sí"], index=0) == "Sí"
+        lsr_micras = st.number_input("LSR (micras)", min_value=0.0, max_value=500.0, value=30.0, step=1.0)
+
+        st.markdown("---")
+        st.subheader("Agudeza Visual (AVMC)")
+        avmc_basal = st.number_input("AVMC basal (letras)", min_value=0, max_value=100, value=60, step=1)
+        avmc_mejor = st.number_input("Mejor AVMC registrada (letras)", min_value=0, max_value=100, value=70, step=1)
+        avmc_actual = st.number_input("AVMC actual (letras)", min_value=0, max_value=100, value=68, step=1)
+
+        st.markdown("---")
+        st.subheader("Evento clínico")
+        hemorragia_nueva = st.radio("¿Hemorragia macular nueva?", ["No", "Sí"], index=0) == "Sí"
+
+        st.markdown("---")
+        st.subheader("GMC – Grosor Macular Central")
+        gmc_sem16 = st.number_input("GMC semana 16 (µm)", min_value=0.0, max_value=1200.0, value=280.0, step=1.0)
+        gmc_min_hist = st.number_input("GMC mínimo histórico (µm)", min_value=0.0, max_value=1200.0, value=260.0, step=1.0)
+        gmc_actual = st.number_input("GMC actual (µm)", min_value=0.0, max_value=1200.0, value=300.0, step=1.0)
+
+        calcular_dmre = st.button("Calcular recomendación (DMRE) 🧮")
+
+    with col_der:
+        st.subheader("Resultado")
+        if calcular_dmre:
+            plan, just, detalle = algoritmo_dmre(
+                intervalo_actual,
+                lir,
+                lsr_micras,
+                avmc_basal,
+                avmc_mejor,
+                avmc_actual,
+                hemorragia_nueva,
+                gmc_sem16,
+                gmc_min_hist,
+                gmc_actual
+            )
+
+            if "Acortar" in plan or "considerar switch" in plan.lower():
+                st.warning(f"**Plan sugerido:** {plan}")
+            else:
+                st.success(f"**Plan sugerido:** {plan}")
+
+            st.write(f"**Justificación clínica:** {just}")
+
+            st.markdown("---")
+            st.subheader("Detalles de actividad")
+
+            st.write(f"- Actividad global: **{'Sí' if detalle['actividad'] else 'No'}**")
+            st.write(f"- ΔAVMC vs basal: **{detalle['delta_vs_basal_letras']} letras**")
+            st.write(f"- ΔAVMC vs mejor: **{detalle['delta_vs_mejor_letras']} letras**")
+
+            if detalle["delta_gmc_vs_sem16"] is not None:
+                st.write(f"- ΔGMC vs semana 16: **+{detalle['delta_gmc_vs_sem16']:.0f} µm** (umbral ≥ 50)")
+            else:
+                st.write("- ΔGMC vs semana 16: **N/A**")
+
+            if detalle["delta_gmc_vs_min"] is not None:
+                st.write(f"- ΔGMC vs mínimo histórico: **+{detalle['delta_gmc_vs_min']:.0f} µm** (umbral ≥ 75)")
+            else:
+                st.write("- ΔGMC vs mínimo histórico: **N/A**")
+
+            if detalle["motivos"]:
+                st.markdown("**Motivos detectados:**")
+                for m in detalle["motivos"]:
+                    st.write(f"- {m}")
+            else:
+                st.write("No se detectaron criterios de actividad.")
+
+            st.info("Soporte a la decisión. No reemplaza juicio clínico.")
+        else:
+            st.info("Ingresa los datos a la izquierda y pulsa **Calcular recomendación (DMRE)**.")
    
