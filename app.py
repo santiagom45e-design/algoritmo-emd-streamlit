@@ -156,6 +156,7 @@ def algoritmo_emd(
 # Lógica del algoritmo DMRE (simplificado para intervalos)
 # =========================
 def algoritmo_dmre(
+    tipo_paciente: str,
     intervalo_actual: str,
     lir: bool,
     lsr_micras: float,
@@ -212,7 +213,10 @@ def algoritmo_dmre(
         if int_sem < 16:
             nuevo = min(16, int_sem + 4)
             plan = f"Extender intervalo a Q{nuevo}W"
-            just = "Sin criterios de actividad (líquido/visión/hemorragia/GMC). Se puede extender en +4 semanas (máx Q16W)."
+            just = (
+                "Sin criterios de actividad (líquido/visión/hemorragia/GMC). "
+                "Se puede extender en +4 semanas (máx Q16W)."
+            )
         else:
             plan = "Mantener intervalo (Q16W)"
             just = "Sin criterios de actividad y ya está en el intervalo máximo (Q16W)."
@@ -222,8 +226,19 @@ def algoritmo_dmre(
             plan = f"Acortar intervalo a Q{nuevo}W"
             just = "Hay criterios de actividad. Se recomienda acortar 4 semanas (mínimo Q8W)."
         else:
-            plan = "Mantener Q8W y considerar switch"
-            just = "Hay actividad a pesar de estar en intervalo corto (Q8W). Considerar evaluación para switch o causas de respuesta subóptima."
+            # Aquí usamos tipo_paciente para hacer el mensaje más fiel a tu protocolo
+            if tipo_paciente == "Naive":
+                plan = "Mantener Q8W y reevaluar (posible switch)"
+                just = (
+                    "Paciente naïve con actividad a pesar de Q8W. "
+                    "Reevaluar respuesta temprana y considerar switch según protocolo."
+                )
+            else:
+                plan = "Mantener Q8W y considerar switch"
+                just = (
+                    "Paciente con tratamiento previo y actividad a pesar de Q8W. "
+                    "Considerar switch por respuesta subóptima."
+                )
 
     # Construir justificación detallada
     motivos = []
@@ -237,14 +252,16 @@ def algoritmo_dmre(
         motivos.append("Actividad por GMC: " + "; ".join(motivos_gmc))
 
     detalle = {
+        "tipo_paciente": tipo_paciente,
         "actividad": actividad,
         "delta_vs_basal_letras": delta_vs_basal,
         "delta_vs_mejor_letras": delta_vs_mejor,
         "delta_gmc_vs_sem16": delta_gmc_vs_sem16,
         "delta_gmc_vs_min": delta_gmc_vs_min,
-        "motivos": motivos
+        "motivos": motivos,
     }
     return plan, just, detalle
+
 
 
 # =========================
@@ -486,6 +503,12 @@ elif pagina == "Algoritmo DMRE (Anti-VEGF)":
 
     with col_izq:
         st.subheader("Esquema actual")
+        tipo_paciente_dmre = st.radio(
+        "Tipo de paciente",
+        ["Naive", "Previo"],
+        help="Naive: sin Anti-VEGF previo. Previo: ya venía en tratamiento."
+        )
+
         intervalo_actual = st.selectbox("Intervalo actual", ["Q8W", "Q12W", "Q16W"], index=0)
 
         st.markdown("---")
@@ -515,17 +538,19 @@ elif pagina == "Algoritmo DMRE (Anti-VEGF)":
         st.subheader("Resultado")
         if calcular_dmre:
             plan, just, detalle = algoritmo_dmre(
-                intervalo_actual,
-                lir,
-                lsr_micras,
-                avmc_basal,
-                avmc_mejor,
-                avmc_actual,
-                hemorragia_nueva,
-                gmc_sem16,
-                gmc_min_hist,
-                gmc_actual
+            tipo_paciente_dmre,
+            intervalo_actual,
+            lir,
+            lsr_micras,
+            avmc_basal,
+            avmc_mejor,
+            avmc_actual,
+            hemorragia_nueva,
+            gmc_sem16,
+            gmc_min_hist,
+            gmc_actual
             )
+
 
             if "Acortar" in plan or "considerar switch" in plan.lower():
                 st.warning(f"**Plan sugerido:** {plan}")
@@ -536,6 +561,7 @@ elif pagina == "Algoritmo DMRE (Anti-VEGF)":
 
             st.markdown("---")
             st.subheader("Detalles de actividad")
+            st.write(f"- Tipo de paciente: **{detalle['tipo_paciente']}**")
 
             st.write(f"- Actividad global: **{'Sí' if detalle['actividad'] else 'No'}**")
             st.write(f"- ΔAVMC vs basal: **{detalle['delta_vs_basal_letras']} letras**")
